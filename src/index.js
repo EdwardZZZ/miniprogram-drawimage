@@ -86,16 +86,42 @@ Component({
                         textBaseline = 'top',
                         textAlign = 'left',
                         fontSize = 16,
-                        text,
+                        text = '',
                         x = 0,
                         y = 0,
-                        maxWidth,
+                        color = '#000',
+                        lineHeight = 50,
+                        maxWidth = width,
                     } = layer;
 
                     ctx.setTextBaseline(textBaseline);
                     ctx.setTextAlign(textAlign);
                     ctx.setFontSize(fontSize);
-                    ctx.fillText(text, px(x), px(y), px(maxWidth));
+                    ctx.setFillStyle(color);
+                    const mw = px(maxWidth);
+
+                    const textArr = [];
+                    let tempArr = [];
+                    let tempWidth = 0;
+                    text.split('').forEach(word => {
+                        const w = ctx.measureText(word).width;
+
+                        if (tempWidth + w > mw) {
+                            textArr.push(tempArr.join(''));
+                            tempArr = [word];
+                            tempWidth = 0;
+                        } else {
+                            tempArr.push(word);
+                            tempWidth += w;
+                        }
+                    });
+                    if (tempArr.length > 0) {
+                        textArr.push(tempArr.join(''));
+                    }
+
+                    textArr.forEach((str, i) => {
+                        ctx.fillText(str, px(x), px(y + i * lineHeight), mw);
+                    });
                 }
 
                 if (layer.type === 'color') {
