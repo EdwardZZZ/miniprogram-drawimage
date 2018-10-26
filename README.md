@@ -15,10 +15,48 @@
     },
     layers: {
         type: Array,
-        value: []
+        value: [
+            {
+                type: 'text', 
+                textBaseline: 'top',
+                textAlign: 'left',
+                fontSize: 16,
+                text,
+                x: 0,
+                y: 0,
+                maxWidth,
+            },
+            {
+                type: 'color',
+                start,
+                end,
+                colorStop,
+                shape = 'Linear'
+            },
+            {
+                type: 'image',
+                imageResource,
+                dx = 0,
+                dy = 0,
+                dWidth = width,
+                dHeight = height
+            },
+        ]
     },
-    bgimg: {
+    background: {
         type: Object,
-        value: null
+        value: {
+            imageResource,
+            dx = 0,
+            dy = 0,
+            dWidth = width,
+            dHeight = height,
+            color: {
+                start,
+                end,
+                colorStop,
+                shape = 'Linear'
+            }
+        }
     }
 

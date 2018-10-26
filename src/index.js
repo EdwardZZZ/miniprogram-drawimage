@@ -23,7 +23,7 @@ Component({
             type: Array,
             value: [],
         },
-        bgimg: {
+        background: {
             type: Object,
             value: null,
         },
@@ -38,38 +38,38 @@ Component({
             ctx = wx.createCanvasContext('draw-canvas', this);
 
             const {
-                bgimg,
+                background,
                 layers,
                 width,
                 height
             } = this.data;
 
             // 背景图片
-            if (bgimg) {
+            if (background) {
                 const {
                     imageResource,
                     dx = 0,
                     dy = 0,
                     dWidth = width,
                     dHeight = height,
-                    bgcolor
-                } = bgimg;
+                    color
+                } = background;
                 // 背景颜色
-                if (bgcolor) {
+                if (color) {
                     const {
                         start,
                         end,
                         colorStop,
-                        type = 'Linear'
-                    } = bgcolor;
+                        shape = 'Linear'
+                    } = color;
 
                     /**
-                        type Circular/Linear
+                        shape Circular/Linear
                         start Array [x, y, width, height]
                         colorStop Array [stop, color]
                         end Array [x, y, width, height]
                      */
-                    const grd = ctx[`create${type}Gradient`](...start)
+                    const grd = ctx[`create${shape}Gradient`](...start)
                     colorStop.forEach((cs) => {
                         grd.addColorStop(...cs);
                     });
@@ -96,6 +96,22 @@ Component({
                     ctx.setTextAlign(textAlign);
                     ctx.setFontSize(fontSize);
                     ctx.fillText(text, px(x), px(y), px(maxWidth));
+                }
+
+                if (layer.type === 'color') {
+                    const {
+                        start,
+                        end,
+                        colorStop,
+                        shape = 'Linear'
+                    } = layer;
+
+                    const grd = ctx[`create${shape}Gradient`](...start)
+                    colorStop.forEach((cs) => {
+                        grd.addColorStop(...cs);
+                    });
+                    ctx.setFillStyle(grd)
+                    ctx.fillRect(...end)
                 }
 
                 if (layer.type === 'image') {
