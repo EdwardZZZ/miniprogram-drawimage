@@ -1,7 +1,7 @@
 
 Page({
     data: {
-        bgimg: {
+        background: {
             imageResource: '/pages/assets/marker.png',
         },
         layers: [

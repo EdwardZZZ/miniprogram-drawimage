@@ -9,6 +9,21 @@ const px = (n) => {
     return n / 750 * windowWidth;
 }
 
+/**
+    shape Radial/Linear
+    start Array [x, y, width, height]
+    colorStop Array [stop, color]
+    end Array [x, y, width, height]
+*/
+const fillColor = (ctx, start, end, colorStop, shape) => {
+    const grd = ctx[`create${shape}Gradient`](...start);
+    colorStop.forEach((cs) => {
+        grd.addColorStop(...cs);
+    });
+    ctx.setFillStyle(grd);
+    ctx.fillRect(...end);
+};
+
 Component({
     properties: {
         width: {
@@ -62,19 +77,7 @@ Component({
                         colorStop,
                         shape = 'Linear'
                     } = color;
-
-                    /**
-                        shape Circular/Linear
-                        start Array [x, y, width, height]
-                        colorStop Array [stop, color]
-                        end Array [x, y, width, height]
-                     */
-                    const grd = ctx[`create${shape}Gradient`](...start)
-                    colorStop.forEach((cs) => {
-                        grd.addColorStop(...cs);
-                    });
-                    ctx.setFillStyle(grd)
-                    ctx.fillRect(...end)
+                    fillColor(ctx, start, end, colorStop, shape);
                 }
                 ctx.drawImage(imageResource, px(dx), px(dy), px(dWidth), px(dHeight));
             }
@@ -131,13 +134,7 @@ Component({
                         colorStop,
                         shape = 'Linear'
                     } = layer;
-
-                    const grd = ctx[`create${shape}Gradient`](...start)
-                    colorStop.forEach((cs) => {
-                        grd.addColorStop(...cs);
-                    });
-                    ctx.setFillStyle(grd)
-                    ctx.fillRect(...end)
+                    fillColor(ctx, start, end, colorStop, shape);
                 }
 
                 if (layer.type === 'image') {

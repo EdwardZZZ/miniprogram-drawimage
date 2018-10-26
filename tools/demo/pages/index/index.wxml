@@ -1,11 +1,4 @@
 <!--index.wxml-->
-<import src="../mod/information.wxml"/>
-<import src="../mod/imageSwiper.wxml"/>
-<import src="../mod/video.wxml"/>
-<import src="../mod/call.wxml"/>
-<import src="../mod/images.wxml"/>
-<import src="../mod/evaluation.wxml"/>
-<import src="../mod/services.wxml"/>
 
 <view class="body">
 
