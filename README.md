@@ -4,7 +4,9 @@
 ### useage
 
 > npm i -S miniprogram-drawimage
+
 > 详情 > 使用npm模块
+
 > 工具 > 构建npm
 
 ```html
