@@ -8,7 +8,7 @@
 > 工具 > 构建npm
 
 ```html
-<drawimage id="drawimage" height="400" background="{{bgimg}}" layers="{{layers}}" />
+<drawimage id="drawimage" height="400" background="{{background}}" layers="{{layers}}" />
 ```
 ```js
 this.selectComponent('#drawimage').toTempFilePath().then((path) => {
