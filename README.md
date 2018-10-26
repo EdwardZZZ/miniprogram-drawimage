@@ -2,6 +2,11 @@
 在小程序中渲染分享图片
 
 ### useage
+
+> npm i -S miniprogram-drawimage
+> 详情 > 使用npm模块
+> 工具 > 构建npm
+
 ```html
 <drawimage id="drawimage" height="400" background="{{bgimg}}" layers="{{layers}}" />
 ```
