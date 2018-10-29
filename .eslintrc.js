@@ -46,6 +46,7 @@ module.exports = {
     'linebreak-style': 'off',
     'no-void': 'off',
     'no-catch-shadow': 'error',
+    'no-unused-vars': 'warn',
     'no-continue': 'off',
     'no-div-regex': 'warn',
     'no-else-return': 'off',

@@ -48,7 +48,7 @@ layers: {
             type: 'color',  // 颜色
             start,          // Array [x0, y0, x1, y1]
             end,            // Array [x, y, width, height]
-            colorStop,      // Array [stop, color]
+            colorStop,      // Array [ [stop, color] ]
             shape: 'Linear' // Linear || Circular
         },
         {

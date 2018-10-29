@@ -1,23 +1,26 @@
 
 Page({
     data: {
-        background: {
-            imageResource: '/pages/assets/marker.png',
-        },
+        // background: {
+        //     imageResource: '/images/1.jpg',
+        // },
         layers: [
-            { type: 'text', text: 'hah1', y: 0 },
-            { type: 'text', text: 'hah1', y: 50 },
-            { type: 'text', text: 'hah1', y: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 0, dy: 0, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 50, dy: 0, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 100, dy: 0, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 150, dy: 0, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 0, dy: 0, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 0, dy: 50, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 0, dy: 100, dWidth: 100, dHeight: 100 },
-            { type: 'image', imageResource: '/pages/assets/marker.png', dx: 0, dy: 150, dWidth: 100, dHeight: 100 },
-            { type: 'text', text: 'hah1', y: 150 },
-            { type: 'text', text: 'hah1', y: 200 },
+            { type: 'text', text: '联发科健康拉', y: 100, radius: 20 },
+            // { type: 'text', text: 'hahbbbb2', y: 50 },
+            // { type: 'text', text: 'hahccccccccccccc3', y: 100, },
+            // { type: 'image', imageResource: '/images/2.jpg', dx: 200, dy: 100, dWidth: 100, dHeight: 100 },
+            // { type: 'image', imageResource: '/images/2.jpg', dx: 100, dy: 200, dWidth: 100, dHeight: 100, radius: 100, },
+            // { type: 'text', text: 'hahdddddddddddddd4', y: 150 },
+            {
+                type: 'text', 
+                text: '联发科健康拉abadasfsdaf联发科健康拉联发科健康拉联发科健康拉联发科健康拉联发科健康拉联发科健康拉', 
+                x: 100,
+                y: 50,
+                maxWidth: 200,
+                padding: '5, 20, 5, 20',
+                radius: 50,
+                bgColor: '#ddd'
+            },
         ],
     },
     onLoad() {
