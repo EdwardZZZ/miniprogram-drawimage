@@ -33,16 +33,19 @@ layers: {
     type: Array,
     value: [
         {
-            type: 'text',   // 文本
-            textBaseline: 'top',
-            textAlign: 'left',
-            fontSize: 16,
-            text: '',
-            x: 0,
-            y: 0,
-            color: '#000',
-            lineHeight: 50,
-            maxWidth: width,
+            textBaseline = 'top',
+            textAlign = 'left',
+            fontSize = 16,
+            text = '',
+            x = 0,
+            y = 0,
+            color = '#000',
+            lineHeight = 50,
+            maxWidth = width,
+            border = '0',
+            radius = 0,
+            padding = 0,    // '10, 20, 30, 40' or 10
+            bgColor = null,
         },
         {
             type: 'color',  // 颜色

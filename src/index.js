@@ -1,5 +1,3 @@
-// let ctx = null;
-
 const px = (n) => {
     if (typeof n === 'undefined') return void 0;
     if (n === 0) return 0;
@@ -67,7 +65,6 @@ Component({
 
     attached() {
         const ctx = wx.createCanvasContext('draw-canvas', this);
-        console.log(ctx);
 
         const {
             background,
@@ -233,17 +230,12 @@ Component({
             }
         });
 
-        ctx.draw(false, () => {
-            console.log(222);
+        ctx.draw(false);
+        setTimeout(() => {
             this.setData({
                 drawing: false,
             });
-        });
-        // setTimeout(() => {
-        //     this.setData({
-        //         drawing: false,
-        //     });
-        // }, 300);
+        }, 300);
     },
 
     methods: {
