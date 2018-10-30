@@ -12,7 +12,7 @@ Page({
             // { type: 'text', text: 'hahbbbb2', y: 50 },
             // { type: 'text', text: 'hahccccccccccccc3', y: 100, },
             // { type: 'image', imageResource: '/images/2.jpg', dx: 200, dy: 100, dWidth: 100, dHeight: 100 },
-            // { type: 'image', imageResource: '/images/2.jpg', dx: 100, dy: 200, dWidth: 100, dHeight: 100, radius: 100, },
+            { type: 'image', imageResource: '/images/2.jpg', dx: 100, dy: 200, dWidth: 100, dHeight: 100, radius: 100, },
             // { type: 'text', text: 'hahdddddddddddddd4', y: 150 },
             {
                 type: 'text', 

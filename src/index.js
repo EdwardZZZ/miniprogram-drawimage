@@ -47,8 +47,10 @@ const roundRect = (ctx, px, py, width, height, radius, lineWidth) => {
 }
 
 const formatBorder = (border) => {
+    if (!border) return [0, 'rgba(0,0,0,0)'];
     const borderArr = border.split(' ');
     borderArr[0] = px(borderArr[0]);
+    if (!borderArr[1]) borderArr[1] = 'rgba(0,0,0,0)';
     return borderArr;
 }
 
@@ -174,7 +176,7 @@ Component({
                 ctx.setFontSize(pxFS);
 
                 // border
-                const [pxbw, bc = '#000'] = formatBorder(border);
+                const [pxbw, bc] = formatBorder(border);
                 // padding 上右下左
                 const [pt, pr, pb, pl] = formatPadding(padding);
 
@@ -209,7 +211,7 @@ Component({
 
                 // 边框
                 ctx.save();
-                ctx.setStrokeStyle(pxbw === 0 ? 'rgba(0,0,0,0)' : bc);
+                ctx.setStrokeStyle(bc);
                 roundRect(ctx, realX, realY, realWidth, realHeight, pxRadius, pxbw);
                 if (bgColor) {
                     ctx.setFillStyle(bgColor);
@@ -243,20 +245,21 @@ Component({
                     dy = 0,
                     radius = 0,
                     dWidth = width,
-                    dHeight = height
+                    dHeight = height,
+                    border
                 } = layer;
+                const [pxbw, bc] = formatBorder(border);
+                const [pxdx, pxdy, pxdWidth, pxdHeight, pxdRadius] =
+                    [px(dx), px(dy), px(dWidth), px(dHeight), px(radius)];
 
                 if (radius) {
                     ctx.save();
-                    ctx.beginPath();
-                    const cx = px(dx + radius / 2);
-                    const cy = px(dy + radius / 2);
-                    ctx.arc(cx, cy, px(dWidth) / 2, 0, 2 * Math.PI);
-                    ctx.clip();
-                    ctx.drawImage(imageResource, px(dx), px(dy), px(dWidth), px(dHeight));
+                    ctx.setStrokeStyle(bc);
+                    roundRect(ctx, pxdx, pxdy, pxdWidth, pxdHeight, pxdRadius, pxbw);
+                    ctx.drawImage(imageResource, pxdx, pxdy, pxdWidth, pxdHeight);
                     ctx.restore();
                 } else {
-                    ctx.drawImage(imageResource, px(dx), px(dy), px(dWidth), px(dHeight));
+                    ctx.drawImage(imageResource, pxdx, pxdy, pxdWidth, pxdHeight);
                 }
             }
         });
