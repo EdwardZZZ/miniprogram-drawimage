@@ -33,18 +33,17 @@ layers: {
     type: Array,
     value: [
         {
-            textBaseline = 'top',
             textAlign = 'left',
-            fontSize = 16,
+            fontSize = 32,
             text = '',
             x = 0,
             y = 0,
             color = '#000',
-            lineHeight = 50,
+            lineHeight = 44,
             maxWidth = width,
-            border = '0',
-            radius = 0,
-            padding = 0,    // '10, 20, 30, 40' or 10
+            border = '0',   // '1 red'
+            radius = 0,     
+            padding = 0,    // '6, 12, 6, 12 or 3'
             bgColor = null,
         },
         {
