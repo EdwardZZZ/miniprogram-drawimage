@@ -81,3 +81,13 @@ background: {
 }
 ```
 
+### toTempFilePath
+```
+this.selectComponent('#drawimage1').toTempFilePath().then((path) => {
+    console.log(path);
+    wx.previewImage({
+        current: path, // 当前显示图片的http链接
+        urls: [path] // 需要预览的图片http链接列表
+    })
+});
+```

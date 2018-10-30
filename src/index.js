@@ -273,19 +273,16 @@ Component({
     },
 
     methods: {
-        toTempFilePath({
-            destWidth,
-            destHeight
-        } = {}) {
+        toTempFilePath() {
             return new Promise((resolve) => {
-                const {
-                    width,
-                    height
-                } = this.data;
+                const {width, height} = this.data;
+                const {pixelRatio} = wx.getSystemInfoSync();
+                const destWidth = px(width) * pixelRatio
+                const destHeight = px(height) * pixelRatio
 
                 wx.canvasToTempFilePath({
-                    destWidth: destWidth || width,
-                    destHeight: destHeight || height,
+                    destWidth,
+                    destHeight,
                     canvasId: 'draw-canvas',
                     success(res) {
                         resolve(res.tempFilePath)
