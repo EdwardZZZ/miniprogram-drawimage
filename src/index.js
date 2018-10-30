@@ -1,6 +1,6 @@
 const px = (n) => {
     if (typeof n === 'undefined') return void 0;
-    if (n === 0) return 0;
+    if (!n) return 0;
     const {
         windowWidth
     } = wx.getSystemInfoSync();
@@ -98,17 +98,17 @@ Component({
         }
 
         // 图层
-        layers.forEach(layer => {
+        layers.forEach((layer) => {
             if (layer.type === 'text') {
                 const {
-                    textBaseline = 'top',
+                    // textBaseline = 'top',
                     textAlign = 'left',
-                    fontSize = 16,
+                    fontSize = 32,
                     text = '',
                     x = 0,
                     y = 0,
                     color = '#000',
-                    lineHeight = 50,
+                    lineHeight = 44,
                     maxWidth = width,
                     border = '0',
                     radius = 0,
@@ -117,6 +117,7 @@ Component({
                 } = layer;
                 const pxx = px(x);
                 const pxy = px(y);
+                const pxFS = px(fontSize);
                 const pxLH = px(lineHeight);
                 const pxMW = px(maxWidth);
                 const pxRadius = px(radius);
@@ -132,7 +133,7 @@ Component({
                     paddingArr.length = 4;
                     paddingArr.fill(px(padding));
                 } else {
-                    paddingArr = padding.split(',').map(p => px(p));
+                    paddingArr = padding.split(' ').map(p => px(p));
                 }
                 // 上右下左
                 const [pt, pr, pb, pl] = paddingArr;
@@ -156,6 +157,7 @@ Component({
                     textArr.push(tempArr.join(''));
                 }
 
+                const textWidth = textArr.length > 1 ? pxMW : ctx.measureText(text).width;
                 const textHeight = textArr.length * pxLH;
                 // 背景
                 // if (bgColor) {
@@ -171,13 +173,22 @@ Component({
                 // }
 
                 // 真实宽高
-                const realX = pxx - pl;
-                const realY = pxy - pt;
-                const realWidth = pxMW + pl + pr;
+                const realWidth = textWidth + pl + pr;
                 const realHeight = textHeight + pt + pb;
+
+                let realX = pxx - pl;
+                let realY = pxy - pt;
+                if (textAlign === 'right') {
+                    realX = pxx - pl - textWidth;
+                    realY = pxy - pt;
+                } else if (textAlign === 'center') {
+                    realX = pxx - pl - textWidth / 2;
+                    realY = pxy - pt;
+                }
+
                 // 边框
                 ctx.save();
-                ctx.setStrokeStyle(pxbw === 0 ? bgColor : bc);
+                ctx.setStrokeStyle(pxbw === 0 ? 'rgba(0,0,0,0)' : bc);
                 roundRect(ctx, realX, realY,
                     realWidth, realHeight, pxRadius, pxbw);
                 if (pxbw === 0 && bgColor) {
@@ -187,9 +198,9 @@ Component({
                 ctx.restore();
 
                 ctx.setFillStyle(color);
-                ctx.setTextBaseline(textBaseline);
+                ctx.setTextBaseline('top');
                 ctx.setTextAlign(textAlign);
-                ctx.setFontSize(fontSize);
+                ctx.setFontSize(pxFS);
                 textArr.forEach((str, i) => {
                     ctx.fillText(str, pxx, pxy + i * pxLH, pxMW);
                 });

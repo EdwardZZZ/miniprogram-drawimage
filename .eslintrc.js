@@ -27,7 +27,7 @@ module.exports = {
       'error',
       'only-multiline'
     ],
-    'complexity': ['error', 10],
+    // 'complexity': ['error', 10],
     'func-names': 'off',
     'global-require': 'off',
     'handle-callback-err': [
