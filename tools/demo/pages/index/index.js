@@ -7,7 +7,8 @@ Page({
         layers: [
             { type: 'text', text: '联发科健康拉', y: 100, radius: 20, bgColor: 'orange' },
             { type: 'text', textAlign: 'right', text: '联发科健康拉', y: 100, x: 750, radius: 20, border: '6 red', lineHeight: 42, padding: '6 10 6 10' },
-            { type: 'text', textAlign: 'center', text: '联发科健康拉', y: 500, x: 375, radius: 20, border: '1 red', lineHeight: 42, padding: '6 10 6 10' },
+            { type: 'text', textAlign: 'center', text: '联发科', y: 305, x: 375, radius: 10, border: '6 red', lineHeight: 42, padding: '6 10 6 10' },
+            { type: 'text', textAlign: 'center', text: '联发科健康拉', y: 100, x: 375, radius: 20, border: '6 red', lineHeight: 42, padding: '6 10 6 10' },
             // { type: 'text', text: 'hahbbbb2', y: 50 },
             // { type: 'text', text: 'hahccccccccccccc3', y: 100, },
             // { type: 'image', imageResource: '/images/2.jpg', dx: 200, dy: 100, dWidth: 100, dHeight: 100 },
@@ -17,7 +18,7 @@ Page({
                 type: 'text', 
                 text: '联发科健康拉abadasfsdaf联发科健康拉联发科健康拉联发科健康拉联发科健康拉联发科健康拉联发科健康拉', 
                 x: 100,
-                y: 50,
+                y: 500,
                 maxWidth: 200,
                 padding: '5, 20, 5, 20',
                 radius: 50,
@@ -31,7 +32,7 @@ Page({
     },
 
     download() {
-        this.selectComponent('#drawimage').toTempFilePath().then((path) => {
+        this.selectComponent('#drawimage1').toTempFilePath().then((path) => {
             console.log(path);
             wx.previewImage({
                 current: path, // 当前显示图片的http链接

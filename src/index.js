@@ -31,10 +31,18 @@ const roundRect = (ctx, px, py, width, height, radius, lineWidth) => {
     ctx.setLineWidth(lineWidth);
     ctx.beginPath();
     ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
+    // ctx.arcTo(x + w, y, x + w, y + h, r);
+    // ctx.arcTo(x + w, y + h, x, y + h, r);
+    // ctx.arcTo(x, y + h, x, y, r);
+    // ctx.arcTo(x, y, x + w, y, r);
+    ctx.lineTo(x + w - r, y);
+    ctx.arc(x + w - r, y + r, r, -Math.PI / 2, 0);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.arc(x + w - r, y + h - r, r, 0, Math.PI / 2);
+    ctx.lineTo(x + r, y + h);
+    ctx.arc(x + r, y + h - r, r, Math.PI / 2, Math.PI);
+    ctx.lineTo(x, y + r);
+    ctx.arc(x + r, y + r, r, Math.PI, Math.PI * 1.5);
     ctx.clip();
 }
 
