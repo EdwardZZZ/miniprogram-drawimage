@@ -36,7 +36,49 @@ const roundRect = (ctx, px, py, width, height, radius, lineWidth) => {
     ctx.arcTo(x, y + h, x, y, r);
     ctx.arcTo(x, y, x + w, y, r);
     ctx.clip();
-    ctx.stroke();
+}
+
+const formatBorder = (border) => {
+    const borderArr = border.split(' ');
+    borderArr[0] = px(borderArr[0]);
+    return borderArr;
+}
+
+const formatPadding = (padding) => {
+    let paddingArr = [];
+    if (typeof padding === 'number') {
+        paddingArr.length = 4;
+        paddingArr.fill(px(padding));
+    } else {
+        paddingArr = padding.split(' ').map(p => px(p));
+    }
+    return paddingArr;
+}
+
+const formatText = (ctx, text, pxMW, pxLH) => {
+    const textArr = [];
+    let tempArr = [];
+    let tempWidth = 0;
+    text.split('').forEach(word => {
+        const w = ctx.measureText(word).width;
+
+        if (tempWidth + w > pxMW) {
+            textArr.push(tempArr.join(''));
+            tempArr = [word];
+            tempWidth = 0;
+        } else {
+            tempArr.push(word);
+            tempWidth = w + tempWidth + 1;
+        }
+    });
+    if (tempArr.length > 0) {
+        textArr.push(tempArr.join(''));
+    }
+
+    const textWidth = textArr.length > 1 ? pxMW : ctx.measureText(text).width;
+    const textHeight = textArr.length * pxLH;
+
+    return {textArr, textWidth, textHeight};
 }
 
 Component({
@@ -124,42 +166,12 @@ Component({
                 ctx.setFontSize(pxFS);
 
                 // border
-                const borderArr = border.split(' ');
-                borderArr[0] = px(borderArr[0]);
-                const [pxbw, bc = '#000'] = borderArr;
+                const [pxbw, bc = '#000'] = formatBorder(border);
+                // padding 上右下左
+                const [pt, pr, pb, pl] = formatPadding(padding);
 
-                // padding
-                let paddingArr = [];
-                if (typeof padding === 'number') {
-                    paddingArr.length = 4;
-                    paddingArr.fill(px(padding));
-                } else {
-                    paddingArr = padding.split(' ').map(p => px(p));
-                }
-                // 上右下左
-                const [pt, pr, pb, pl] = paddingArr;
+                const {textArr, textWidth, textHeight} = formatText(ctx, text, pxMW, pxLH);
 
-                const textArr = [];
-                let tempArr = [];
-                let tempWidth = 0;
-                text.split('').forEach(word => {
-                    const w = ctx.measureText(word).width;
-
-                    if (tempWidth + w > pxMW) {
-                        textArr.push(tempArr.join(''));
-                        tempArr = [word];
-                        tempWidth = 0;
-                    } else {
-                        tempArr.push(word);
-                        tempWidth = w + tempWidth + 1;
-                    }
-                });
-                if (tempArr.length > 0) {
-                    textArr.push(tempArr.join(''));
-                }
-
-                const textWidth = textArr.length > 1 ? pxMW : ctx.measureText(text).width;
-                const textHeight = textArr.length * pxLH;
                 // 背景
                 // if (bgColor) {
                 //     ctx.setStrokeStyle(bgColor);
@@ -190,12 +202,12 @@ Component({
                 // 边框
                 ctx.save();
                 ctx.setStrokeStyle(pxbw === 0 ? 'rgba(0,0,0,0)' : bc);
-                roundRect(ctx, realX, realY,
-                    realWidth, realHeight, pxRadius, pxbw);
-                if (pxbw === 0 && bgColor) {
+                roundRect(ctx, realX, realY, realWidth, realHeight, pxRadius, pxbw);
+                if (bgColor) {
                     ctx.setFillStyle(bgColor);
                     ctx.fillRect(realX, realY, realWidth, realHeight);
                 }
+                ctx.stroke();
                 ctx.restore();
 
                 ctx.setFillStyle(color);
