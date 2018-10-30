@@ -121,6 +121,7 @@ Component({
                 const pxLH = px(lineHeight);
                 const pxMW = px(maxWidth);
                 const pxRadius = px(radius);
+                ctx.setFontSize(pxFS);
 
                 // border
                 const borderArr = border.split(' ');
@@ -200,7 +201,6 @@ Component({
                 ctx.setFillStyle(color);
                 ctx.setTextBaseline('top');
                 ctx.setTextAlign(textAlign);
-                ctx.setFontSize(pxFS);
                 textArr.forEach((str, i) => {
                     ctx.fillText(str, pxx, pxy + i * pxLH, pxMW);
                 });
