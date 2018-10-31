@@ -40,4 +40,8 @@ Page({
             })
         });
     },
+
+    toTempFile(res) {
+        console.log(res);
+    }
 });

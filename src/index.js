@@ -93,8 +93,36 @@ const formatText = (ctx, text, pxMW, pxLH) => {
     return {textArr, textWidth, textHeight};
 }
 
+function drawed() {
+    const {
+        needShow,
+        width,
+        height,
+    } = this.data;
+
+    this.setData({
+        drawing: !needShow,
+    });
+
+    const self = this;
+    const destWidth = px(width) * pixelRatio;
+    const destHeight = px(height) * pixelRatio;
+    wx.canvasToTempFilePath({
+        destWidth,
+        destHeight,
+        canvasId: 'draw-canvas',
+        success(res) {
+            self.triggerEvent('toTempFile', res);
+        }
+    }, this);
+}
+
 Component({
     properties: {
+        needShow: {
+            type: Boolean,
+            value: true,
+        },
         width: {
             type: Number,
             value: 750,
@@ -118,14 +146,14 @@ Component({
     },
 
     attached() {
-        const ctx = wx.createCanvasContext('draw-canvas', this);
-
         const {
             background,
             layers,
             width,
-            height
+            height,
         } = this.data;
+
+        const ctx = wx.createCanvasContext('draw-canvas', this);
 
         // 背景图片
         if (background) {
@@ -266,20 +294,21 @@ Component({
             }
         });
 
-        ctx.draw(false);
+        ctx.draw(false, () => {
+            drawed.call(this);
+        });
+
         setTimeout(() => {
-            this.setData({
-                drawing: false,
-            });
-        }, 300);
+            drawed.call(this);
+        }, 3000);
     },
 
     methods: {
         toTempFilePath() {
             return new Promise((resolve) => {
                 const {width, height} = this.data;
-                const destWidth = px(width) * pixelRatio
-                const destHeight = px(height) * pixelRatio
+                const destWidth = px(width) * pixelRatio;
+                const destHeight = px(height) * pixelRatio;
 
                 wx.canvasToTempFilePath({
                     destWidth,

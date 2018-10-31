@@ -10,12 +10,17 @@
 > 工具 > 构建npm
 
 ```html
-<drawimage id="drawimage" height="400" background="{{background}}" layers="{{layers}}" />
+<drawimage bind:toTempFile="{{toTempFile}}" id="drawimage" height="400" background="{{background}}" layers="{{layers}}" />
 ```
 ```js
 this.selectComponent('#drawimage').toTempFilePath().then((path) => {
     console.log(path);
 });
+```
+
+### event
+```
+toTempFile ====> wx.wx.canvasToTempFilePath
 ```
 
 ### options

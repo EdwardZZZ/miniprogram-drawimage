@@ -1,8 +1,8 @@
 <view class="draw-container" style="width: {{width}}rpx; height: {{height}}rpx;">
-    <view wx:if="{{drawing}}" class="draw-loading">
+    <view wx:if="{{needShow && drawing}}" class="draw-loading">
         <view class="spinner">
             <view class="bounce"/>
         </view>
     </view>
-    <canvas style="width: {{width}}rpx; height: {{height}}rpx; opacity: {{drawing ? 0 : 1}};" canvas-id="draw-canvas"></canvas>
+    <canvas hidden="{{needShow && drawing}}" style="width: {{width}}rpx; height: {{height}}rpx;" canvas-id="draw-canvas"></canvas>
 </view>
