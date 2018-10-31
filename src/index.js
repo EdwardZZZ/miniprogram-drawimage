@@ -1,9 +1,11 @@
+const {
+    windowWidth,
+    pixelRatio,
+} = wx.getSystemInfoSync();
+
 const px = (n) => {
     if (typeof n === 'undefined') return void 0;
     if (!n) return 0;
-    const {
-        windowWidth
-    } = wx.getSystemInfoSync();
     return parseInt(n, 10) / 750 * windowWidth;
 }
 
@@ -276,7 +278,6 @@ Component({
         toTempFilePath() {
             return new Promise((resolve) => {
                 const {width, height} = this.data;
-                const {pixelRatio} = wx.getSystemInfoSync();
                 const destWidth = px(width) * pixelRatio
                 const destHeight = px(height) * pixelRatio
 
