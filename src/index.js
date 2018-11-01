@@ -95,14 +95,9 @@ const formatText = (ctx, text, pxMW, pxLH) => {
 
 function drawed() {
     const {
-        needShow,
         width,
         height,
     } = this.data;
-
-    this.setData({
-        drawing: !needShow,
-    });
 
     const self = this;
     const destWidth = px(width) * pixelRatio;
@@ -112,6 +107,10 @@ function drawed() {
         destHeight,
         canvasId: 'draw-canvas',
         success(res) {
+            console.log(res);
+            self.setData({
+                imageUrl: res.tempFilePath,
+            });
             self.triggerEvent('toTempFile', res);
         }
     }, this);
@@ -119,10 +118,6 @@ function drawed() {
 
 Component({
     properties: {
-        needShow: {
-            type: Boolean,
-            value: true,
-        },
         width: {
             type: Number,
             value: 750,
@@ -142,7 +137,7 @@ Component({
     },
 
     data: {
-        drawing: true,
+        imageUrl: null,
     },
 
     attached() {
@@ -301,24 +296,5 @@ Component({
         setTimeout(() => {
             drawed.call(this);
         }, 3000);
-    },
-
-    methods: {
-        toTempFilePath() {
-            return new Promise((resolve) => {
-                const {width, height} = this.data;
-                const destWidth = px(width) * pixelRatio;
-                const destHeight = px(height) * pixelRatio;
-
-                wx.canvasToTempFilePath({
-                    destWidth,
-                    destHeight,
-                    canvasId: 'draw-canvas',
-                    success(res) {
-                        resolve(res.tempFilePath)
-                    }
-                }, this);
-            });
-        },
     }
 });
