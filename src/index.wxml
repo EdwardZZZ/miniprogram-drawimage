@@ -4,6 +4,6 @@
             <view class="bounce"/>
         </view>
     </view>
-    <canvas wx:if="{{!imageUrl}}" style="width: {{width}}rpx; height: {{height}}rpx;" canvas-id="draw-canvas"></canvas>
-    <image wx:if="{{imageUrl}}" src="{{imageUrl}}" style="width: {{width}}rpx; height: {{height}}rpx;" />
+    <canvas wx:if="{{!imageUrl}}" style="width: {{width}}rpx; height: {{height}}rpx;" canvas-id="{{canvasId}}"></canvas>
+    <image class="draw-image" wx:if="{{imageUrl}}" src="{{imageUrl}}" style="width: {{width}}rpx; height: {{height}}rpx;" />
 </view>

@@ -98,27 +98,37 @@ function drawed() {
         width,
         height,
         imageUrl,
+        canvasId,
     } = this.data;
     if (imageUrl) return;
 
     const self = this;
     const destWidth = px(width) * pixelRatio;
     const destHeight = px(height) * pixelRatio;
+
+    console.log('????????', canvasId);
     wx.canvasToTempFilePath({
         destWidth,
         destHeight,
-        canvasId: 'draw-canvas',
+        canvasId,
         success(res) {
             self.setData({
                 imageUrl: res.tempFilePath,
             });
             self.triggerEvent('toTempFile', res);
+        },
+        complete(res) {
+            console.warn(canvasId, res);
         }
     }, this);
 }
 
 Component({
     properties: {
+        canvasId: {
+            type: String,
+            value: 'draw-canvas',
+        },
         width: {
             type: Number,
             value: 750,
@@ -147,9 +157,10 @@ Component({
             layers,
             width,
             height,
+            canvasId,
         } = this.data;
 
-        const ctx = wx.createCanvasContext('draw-canvas', this);
+        const ctx = wx.createCanvasContext(canvasId, this);
 
         // 背景图片
         if (background) {
