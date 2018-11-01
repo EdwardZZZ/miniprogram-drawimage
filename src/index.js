@@ -97,7 +97,9 @@ function drawed() {
     const {
         width,
         height,
+        imageUrl,
     } = this.data;
+    if (imageUrl) return;
 
     const self = this;
     const destWidth = px(width) * pixelRatio;

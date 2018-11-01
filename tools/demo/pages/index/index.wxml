@@ -4,7 +4,7 @@
     <swiper style="height: 600rpx;" indicator-dots="{{true}}">
     <block wx:for="{{[1, 2, 3]}}" wx:key="{{index}}">
         <swiper-item>
-        <drawimage bind:toTempFile="toTempFile" id="drawimage{{index}}" height="1000" background="{{background}}" layers="{{layers}}" bind:download="download" />
+            <drawimage bind:toTempFile="toTempFile" id="drawimage{{index}}" height="1000" background="{{background}}" layers="{{layers}}" bind:download="download" />
         </swiper-item>
     </block>
     </swiper>
