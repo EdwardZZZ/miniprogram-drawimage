@@ -107,7 +107,6 @@ function drawed() {
         destHeight,
         canvasId: 'draw-canvas',
         success(res) {
-            console.log(res);
             self.setData({
                 imageUrl: res.tempFilePath,
             });

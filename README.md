@@ -12,15 +12,12 @@
 ```html
 <drawimage bind:toTempFile="{{toTempFile}}" id="drawimage" height="400" background="{{background}}" layers="{{layers}}" />
 ```
-```js
-this.selectComponent('#drawimage').toTempFilePath().then((path) => {
-    console.log(path);
-});
-```
 
 ### event
 ```
-toTempFile ====> wx.wx.canvasToTempFilePath
+bind:toTempFile ====> wx.canvasToTempFilePath
+
+res.detail
 ```
 
 ### options
@@ -84,15 +81,4 @@ background: {
         }
     }
 }
-```
-
-### toTempFilePath
-```
-this.selectComponent('#drawimage1').toTempFilePath().then((path) => {
-    console.log(path);
-    wx.previewImage({
-        current: path, // 当前显示图片的http链接
-        urls: [path] // 需要预览的图片http链接列表
-    })
-});
 ```

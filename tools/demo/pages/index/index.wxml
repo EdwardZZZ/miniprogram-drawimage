@@ -1,12 +1,12 @@
 <!--index.wxml-->
 
 <view class="body">
-
-    <drawimage bind:toTempFile="toTempFile" id="drawimage1" height="1000" background="{{background}}" layers="{{layers}}" bind:download="download" />
-
-    <button bindtap="download">下载</button>
-
-    <drawimage id="drawimage1" height="1000" background="{{background}}" layers="{{layers}}" bind:download="download" />
-
+    <swiper style="height: 600rpx;" indicator-dots="{{true}}">
+    <block wx:for="{{[1, 2, 3]}}" wx:key="{{index}}">
+        <swiper-item>
+        <drawimage bind:toTempFile="toTempFile" id="drawimage{{index}}" height="1000" background="{{background}}" layers="{{layers}}" bind:download="download" />
+        </swiper-item>
+    </block>
+    </swiper>
 </view>
 
