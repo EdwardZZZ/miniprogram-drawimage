@@ -10,18 +10,28 @@ const px = (n) => {
 }
 
 /**
-    shape Radial/Linear
+    shape Circular/Linear
     start Array [x, y, width, height]
     colorStop Array [stop, color]
     end Array [x, y, width, height]
 */
 const fillColor = (ctx, start, end, colorStop, shape) => {
-    const grd = ctx[`create${shape}Gradient`](...start);
+    let grd = null;
+
+    if (shape === 'Radial') {
+        const [x, y, r] = start;
+        grd = ctx.createCircularGradient(...[px(x), px(y), px(r)]);
+    } else {
+        const [x0, y0, x1, y1] = start;
+        grd = ctx.createLinearGradient(...[px(x0), px(y0), px(x1), px(y1)]);
+    }
     colorStop.forEach((cs) => {
         grd.addColorStop(...cs);
     });
     ctx.setFillStyle(grd);
-    ctx.fillRect(...end);
+
+    const [x, y, widht, height] = end;
+    ctx.fillRect(...[px(x), px(y), px(widht), px(height)]);
 };
 
 const roundRect = (ctx, px, py, width, height, radius, lineWidth) => {
@@ -106,7 +116,6 @@ function drawed() {
     const destWidth = px(width) * pixelRatio;
     const destHeight = px(height) * pixelRatio;
 
-    console.log('????????', canvasId);
     wx.canvasToTempFilePath({
         destWidth,
         destHeight,
@@ -116,9 +125,6 @@ function drawed() {
                 imageUrl: res.tempFilePath,
             });
             self.triggerEvent('toTempFile', res);
-        },
-        complete(res) {
-            console.warn(canvasId, res);
         }
     }, this);
 }
