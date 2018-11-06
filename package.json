@@ -5,7 +5,7 @@
   "main": "miniprogram_dist/index.js",
   "scripts": {
     "dev": "gulp dev --develop",
-    "watch": "gulp watch --develop --watch",
+    "start": "gulp watch --develop --watch",
     "build": "gulp",
     "dist": "npm run build",
     "clean-dev": "gulp clean --develop",

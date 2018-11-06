@@ -1,6 +1,10 @@
 # drawimage
 在小程序中渲染分享图片
 
+## 注意
+canvas在展示的时候就会绘图，所以有异步或者缓存图片操作请加上wx:if，当数据拼好后再展示此组件，绘图完成后会调用toTempFile方法。
+
+
 ### useage
 
 > npm i -S miniprogram-drawimage
