@@ -39,6 +39,7 @@ layers: {
     type: Array,
     value: [
         {
+            type: 'text',
             textAlign = 'left',
             fontSize = 32,
             text = '',
@@ -47,6 +48,7 @@ layers: {
             color = '#000',
             lineHeight = 44,
             maxWidth = width,
+            maxHeight = height,
             border = '0',   // '1 red'
             radius = 0,     
             padding = 0,    // '6, 12, 6, 12 or 3'
