@@ -77,7 +77,7 @@ const formatPadding = (padding) => {
     return paddingArr;
 }
 
-const formatText = (ctx, text, pxMW, pxLH) => {
+const formatText = (ctx, text, pxMW, pxMH, pxLH) => {
     const textArr = [];
     let tempArr = [];
     let tempWidth = 0;
@@ -85,6 +85,12 @@ const formatText = (ctx, text, pxMW, pxLH) => {
         const w = ctx.measureText(word).width;
 
         if (tempWidth + w > pxMW) {
+            // 检查maxHeight
+            tempHeight += pxLH;
+            if (tempHeight > pxMH) {
+                return;
+            }
+
             textArr.push(tempArr.join(''));
             tempArr = [word];
             tempWidth = 0;
@@ -205,6 +211,7 @@ Component({
                     color = '#000',
                     lineHeight = 44,
                     maxWidth = width,
+                    maxHeight = height,
                     border = '0',
                     radius = 0,
                     padding = 0,
@@ -216,6 +223,7 @@ Component({
                 const pxFS = px(fontSize);
                 const pxLH = px(lineHeight);
                 const pxMW = px(maxWidth);
+                const pxMH = px(maxHeight);
                 const pxRadius = px(radius);
                 ctx.setFontSize(pxFS);
 
@@ -224,7 +232,7 @@ Component({
                 // padding 上右下左
                 const [pt, pr, pb, pl] = formatPadding(padding);
 
-                const {textArr, textWidth, textHeight} = formatText(ctx, text, pxMW, pxLH);
+                const {textArr, textWidth, textHeight} = formatText(ctx, text, pxMW, pxMH, pxLH);
 
                 if (maxLine) {
                     // 文案行数是否超过行数最高限
