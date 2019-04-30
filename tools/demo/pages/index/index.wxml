@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<view class="body">
+<view class="body" bindtap="tapbody">
     <swiper style="height: 600rpx;" indicator-dots="{{true}}">
     <block wx:for="{{[1, 2, 3]}}" wx:key="{{index}}">
         <swiper-item>

@@ -81,7 +81,7 @@ const formatText = (ctx, text, pxMW, pxLH) => {
     const textArr = [];
     let tempArr = [];
     let tempWidth = 0;
-    text.split('').forEach(word => {
+    for (const word of text) {
         const w = ctx.measureText(word).width;
 
         if (tempWidth + w > pxMW) {
@@ -92,7 +92,7 @@ const formatText = (ctx, text, pxMW, pxLH) => {
             tempArr.push(word);
             tempWidth = w + tempWidth + 1;
         }
-    });
+    }
     if (tempArr.length > 0) {
         textArr.push(tempArr.join(''));
     }
@@ -310,9 +310,5 @@ Component({
         ctx.draw(false, () => {
             drawed.call(this);
         });
-
-        setTimeout(() => {
-            drawed.call(this);
-        }, 3000);
     }
 });

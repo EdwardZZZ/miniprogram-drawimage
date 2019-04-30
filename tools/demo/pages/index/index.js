@@ -28,6 +28,7 @@ Page({
         ],
         images: [],
     },
+
     onLoad() {
         // console.log(wx.getSystemInfoSync());
     },
@@ -52,5 +53,9 @@ Page({
                 urls: images,
             });
         }, 1000);
+    },
+
+    tapbody(e) {
+        console.log(e);
     }
 });
