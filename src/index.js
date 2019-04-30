@@ -209,6 +209,7 @@ Component({
                     radius = 0,
                     padding = 0,
                     bgColor = null,
+                    maxLine = 0,
                 } = layer;
                 const pxx = px(x);
                 const pxy = px(y);
@@ -225,6 +226,18 @@ Component({
 
                 const {textArr, textWidth, textHeight} = formatText(ctx, text, pxMW, pxLH);
 
+                if (maxLine) {
+                    // 文案行数是否超过行数最高限
+                    const overLine = textArr.length > maxLine;
+                    // 直接截取
+                    textArr.length = maxLine;
+                    if (overLine) {
+                        // 最后一行的后边两个字替换为......
+                        const strArr = textArr[maxLine - 1].split('');
+                        strArr.splice((strArr.length - 2), 2, '...', '...');
+                        textArr.splice(maxLine - 1, 1, strArr.join(''));
+                    }
+                }
                 // 背景
                 // if (bgColor) {
                 //     ctx.setStrokeStyle(bgColor);
