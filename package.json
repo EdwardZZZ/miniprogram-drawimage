@@ -1,12 +1,13 @@
 {
   "name": "miniprogram-drawimage",
-  "version": "0.1.0",
+  "version": "0.1.14",
   "description": "",
   "main": "miniprogram_dist/index.js",
   "scripts": {
     "dev": "gulp dev --develop",
     "start": "gulp watch --develop --watch",
     "build": "gulp",
+    "prepublish": "npm run build",
     "dist": "npm run build",
     "clean-dev": "gulp clean --develop",
     "clean": "gulp clean",
