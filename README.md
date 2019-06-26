@@ -3,6 +3,7 @@
 
 ## 注意
 canvas在展示的时候就会绘图，所以有异步或者缓存图片操作请加上wx:if，当数据拼好后再展示此组件，绘图完成后会调用toTempFile方法。
+图像默认转成png格式，如需要jpg格式，可以加上fileType参数(微信只支持jpg或者png)
 
 
 ### useage
@@ -14,7 +15,7 @@ canvas在展示的时候就会绘图，所以有异步或者缓存图片操作�
 > 工具 > 构建npm
 
 ```html
-<drawimage bind:toTempFile="{{toTempFile}}" id="drawimage" height="400" background="{{background}}" layers="{{layers}}" />
+<drawimage bind:toTempFile="{{toTempFile}}" id="drawimage" height="400" background="{{background}}" layers="{{layers}}" fileType="{{fileType}}"/>
 ```
 
 ### event

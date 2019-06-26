@@ -109,6 +109,7 @@ function drawed() {
         height,
         imageUrl,
         canvasId,
+        fileType,
     } = this.data;
     if (imageUrl) return;
 
@@ -120,6 +121,7 @@ function drawed() {
         destWidth,
         destHeight,
         canvasId,
+        fileType,
         success(res) {
             self.setData({
                 imageUrl: res.tempFilePath,
@@ -151,6 +153,10 @@ Component({
             type: Object,
             value: null,
         },
+        fileType: {
+            type: String,
+            value: 'png',
+        }
     },
 
     data: {
